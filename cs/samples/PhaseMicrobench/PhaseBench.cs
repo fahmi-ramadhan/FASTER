@@ -75,9 +75,8 @@ namespace epvs
                 {
                     if (random.NextDouble() < options.VersionChangeProbability)
                         opIndexes[i] = 2;
-                    if (random.NextDouble() < options.BlockProbability)
+                    else if (random.NextDouble() < options.BlockProbability)
                         opIndexes[i] = 1;
-                    opIndexes[i] = 0;
                 }
             }
 

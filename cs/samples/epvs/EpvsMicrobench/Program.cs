@@ -49,6 +49,7 @@ namespace epvs
         static void Main(string[] args)
         {
             var options = Parser.Default.ParseArguments<Options>(args).Value;
+            FASTER.core.VisibleReadersTable.TableSize = options.EpochTableSize;
             var bench = new EpvsBench();
             bench.RunExperiment(options);
         }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -114,7 +114,7 @@ namespace epvs
         {
             hashBytes = new byte[8];
             new Random().NextBytes(hashBytes);
-            LightEpoch.InitializeStatic(512, 16);
+            LightEpoch.InitializeStatic(4096, 16);
             tested = new List<EpochProtectedVersionScheme>();
             testedBravo = new List<BravoLatch>();
             for (var i = 0; i < options.NumInstances; i++)

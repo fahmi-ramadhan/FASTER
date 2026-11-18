@@ -47,6 +47,12 @@ namespace epvs
         
         [Option('u', "output-file", Default = "")]
         public string OutputFile { get; set; }
+
+        [Option('e', "table-size", Default = 4096, HelpText = "epoch table size AND BRAVO visible-readers table size")]
+        public int EpochTableSize { get; set; }
+
+        [Option("resize-delay", Default = 0, HelpText = "ms to sleep inside every array resize")]
+        public int ResizeDelayMs { get; set; }
     }
 
 
@@ -57,7 +63,9 @@ namespace epvs
             var options = Parser.Default.ParseArguments<Options>(args).Value;
 
             options.WriteProbability = options.ReadProbability = 0.5 * (1 - options.PushProbability);
-            LightEpoch.InitializeStatic(128, 16);
+            VisibleReadersTable.TableSize = options.EpochTableSize;
+            ListConfig.ResizeDelayMs = options.ResizeDelayMs;
+            LightEpoch.InitializeStatic(options.EpochTableSize, 16);
 
             switch (options.DataStructureType)
             {

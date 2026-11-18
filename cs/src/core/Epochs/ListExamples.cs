@@ -1,9 +1,15 @@
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FASTER.core
 {
+    public static class ListConfig
+    {
+        public static int ResizeDelayMs = 0;
+        public static void Delay() { if (ResizeDelayMs > 0) Thread.Sleep(ResizeDelayMs); }
+    }
+
     public interface IResizableList
     {
         public void InitializeThread();
@@ -148,7 +154,7 @@ namespace FASTER.core
                 rwLatch.EnterWriteLock();
                 var newList = new long[2 * list.Length];
                 Array.Copy(list, newList, list.Length);
-                // Thread.Sleep(10);
+                ListConfig.Delay();
                 list = newList;
             }
             finally
@@ -310,7 +316,7 @@ namespace FASTER.core
         {
             var newList = new long[2 * list.Length];
             Array.Copy(list, newList, list.Length);
-            // Thread.Sleep(10);
+            ListConfig.Delay();
             list = newList;
         }
 
@@ -396,7 +402,7 @@ namespace FASTER.core
         {
             var newList = new long[2 * list.Length];
             Array.Copy(list, newList, list.Length);
-            // Thread.Sleep(10);
+            ListConfig.Delay();
             list = newList;
         }
 
@@ -465,7 +471,7 @@ namespace FASTER.core
                     {
                         Array.Copy(obj.list, obj.newList, obj.list.Length);
                         copyDone = true;
-                        // Thread.Sleep(10);
+                        ListConfig.Delay();
                         Thread.Yield();
                         epvs.TryStepStateMachine();
                     });

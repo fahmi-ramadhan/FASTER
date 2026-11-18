@@ -328,7 +328,7 @@ namespace FASTER.benchmark
             Console.WriteLine($"loaded {txn_keys.Length:N0} txns in {(double)sw.ElapsedMilliseconds / 1000:N3} seconds");
         }
 
-        internal const string DataPath = "D:/data/FasterYcsbBenchmark";
+        internal const string DataPath = "C:/faster_data/FasterYcsbBenchmark";
         
         internal static string DevicePath => $"{DataPath}/hlog";
 
